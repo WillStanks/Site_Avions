@@ -6,13 +6,14 @@
     <title>Liste des avions</title>
 </head>
 <style>
-    form {
+    form,
+    body {
         text-align: center;
     }
 </style>
 
 <body>
-    <h2>Avions Air Transat V0.1.1</h2>
+    <h2>Avions Air Transat V0.3.1</h2>
 
     <a href="avion_nouveau.php">Ajouter un avion</a>
 
@@ -26,12 +27,25 @@
 
     // Récupération des 10 derniers avions
     $reponse = $bdd->query('SELECT * FROM avion');
+    ?>
 
+    <table>
+        <tr>
+            <th>Actions</th>
+            <th>Nom de l'avion</th>
+            <th>Détails de l'avion</th>
+            <th>Nombre de sièges</th>
+        </tr>
+    </table>
+
+    <?php
     // Affichage de chaque avion (toutes les données sont protégées par htmlspecialchars)
     while ($donnees = $reponse->fetch()) {
-        echo '<p><a href="avion_modifier.php?id=' . $donnees['idAvion'] . '">[modifier]</a> <strong>' .
-            htmlspecialchars($donnees['nom']) . '</strong> </br>';
-        echo htmlspecialchars('Détails de l\'avion : ' . $donnees['autresDetails']) . '</br>' . htmlspecialchars('Nombre de sièges : ' . $donnees['nbreSieges']);
+        echo '<tr><td>' .
+            '<p><a href="avion_modifier.php?id=' . $donnees['idAvion'] . '">[mod.]</a> ' .
+            '<a href="avion_confirmer.php?id=' . $donnees['idAvion'] . '">[suppr.]</a> <strong></td><td>' .
+            htmlspecialchars($donnees['nom']) . '</strong></td><td>';
+        echo htmlspecialchars($donnees['autresDetails']) . '</td><td>' . htmlspecialchars($donnees['nbreSieges']) . ' sièges</td></tr>';
     }
 
     $reponse->closeCursor();

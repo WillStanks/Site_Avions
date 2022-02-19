@@ -14,7 +14,7 @@
 <body>
 
     <form action="avion_envoyer.php" method="post">
-        <h2>Ajouter un avion V0.1.1</h2>
+        <h2>Ajouter un avion V0.3.1</h2>
         <p>
             <label for="nom">Nom de l'avion</label> : <input type="text" name="nom" id="nom" /><br />
             <label for="titre">Détails de l'avion</label> : <textarea rows="4" cols="50" type="text" name="autresDetails" id="autresDetails"></textarea><br />

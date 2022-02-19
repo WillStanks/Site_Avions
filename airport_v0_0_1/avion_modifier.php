@@ -36,7 +36,7 @@
     ?>
 
     <form action="avion_mise_a_jour.php" method="post">
-        <h2>Modifier un avion V0.1.1</h2>
+        <h2>Modifier un avion V0.3.1</h2>
         <p>
             <label for="nom">Nom de l'avion</label> : <input type="text" name="nom" id="nom" value="<?php echo htmlspecialchars($donnees['nom']); ?>" /><br />
             <label for="texte">Détails de l'avion</label> : <textarea rows="4" cols="50" type="text" name="autresDetails" id="autresDetails"><?php echo htmlspecialchars($donnees['autresDetails']); ?></textarea><br />
