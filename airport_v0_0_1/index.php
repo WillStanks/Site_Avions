@@ -6,8 +6,7 @@
     <title>Liste des avions</title>
 </head>
 <style>
-    form,
-    body {
+    form {
         text-align: center;
     }
 </style>
@@ -15,6 +14,7 @@
 <body>
     <h2>Avions Air Transat V0.3.1</h2>
 
+    <a href="a_propos.html">À propos</a></br>
     <a href="avion_nouveau.php">Ajouter un avion</a>
 
     <?php
