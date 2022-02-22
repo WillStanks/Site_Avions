@@ -32,6 +32,7 @@ header('Location: index.php');
     <form action="index.php">
         <input type="submit" value="Continuer">
     </form>
+
 </body>
 
 </html>
