@@ -2,15 +2,15 @@
 
 <?php
 
-require 'modele.php';
+require 'Modele/modele.php';
 
 try{
     $reponse = getAvions();
     // Affichage
-    require 'vueAvion.php';
+    require 'Vue/vueAccueil.php';
 }
 catch (Exception $e) {
     $msgErreur = $e->getMessage();
-    require 'vueErreur.php';
+    require 'Vue/vueErreur.php';
 }
 

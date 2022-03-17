@@ -2,6 +2,7 @@
 
 <?php ob_start(); ?>
 
+
 <table>
     <tr>
         <th>Actions</th>
@@ -16,8 +17,8 @@
     while ($donnees = $reponse->fetch()) {
         echo '<tr><td>' .
             '<p><a href="avion_modifier.php?id=' . $donnees['idAvion'] . '">[mod.]</a> ' .
-            '<a href="avion_confirmer.php?id=' . $donnees['idAvion'] . '">[suppr.]</a> <strong></td><td>' .
-            htmlspecialchars($donnees['nom']) . '</strong></td><td>';
+            '<a href="avion_confirmer.php?id=' . $donnees['idAvion'] . '">[suppr.]</a> </td><td><strong>' .
+            '<a href="avion.php?id=' . $donnees['idAvion'] . '">' . htmlspecialchars($donnees['nom']) . '</strong></a></td><td>';
         echo htmlspecialchars($donnees['autresDetails']) . '</td><td>' . htmlspecialchars($donnees['nbreSieges']) . ' sièges</td></tr>';
     }
 
@@ -25,4 +26,4 @@
 
 ?>
 <?php $contenu = ob_get_clean(); ?>
-<?php require 'gabarit.php'; ?>
+<?php require 'Vue/gabarit.php'; ?>
