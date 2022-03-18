@@ -13,9 +13,9 @@
 </style>
 
 <body>
-    <h2>Avions Air Transat V2.0.4</h2>
+    <h2>Avions Air Transat V3.0.2</h2>
 
-    <a href="a_propos.html">À propos</a></br>
+    <a href="Vue/a_propos.html">À propos</a></br>
     <a href="avion_nouveau.php">Ajouter un avion</a>
 
     <div id="contenu">

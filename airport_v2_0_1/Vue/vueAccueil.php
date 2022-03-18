@@ -13,16 +13,16 @@
 </table>
 
 <?php
-    // Affichage de chaque avion (toutes les données sont protégées par htmlspecialchars)
-    while ($donnees = $reponse->fetch()) {
-        echo '<tr><td>' .
-            '<p><a href="avion_modifier.php?id=' . $donnees['idAvion'] . '">[mod.]</a> ' .
-            '<a href="avion_confirmer.php?id=' . $donnees['idAvion'] . '">[suppr.]</a> </td><td><strong>' .
-            '<a href="avion.php?id=' . $donnees['idAvion'] . '">' . htmlspecialchars($donnees['nom']) . '</strong></a></td><td>';
-        echo htmlspecialchars($donnees['autresDetails']) . '</td><td>' . htmlspecialchars($donnees['nbreSieges']) . ' sièges</td></tr>';
-    }
+// Affichage de chaque avion (toutes les données sont protégées par htmlspecialchars)
+while ($donnees = $avions->fetch()) {
+    echo '<tr><td>' .
+        '<p><a href="avion_modifier.php?id=' . $donnees['idAvion'] . '">[mod.]</a> ' .
+        '<a href="avion_confirmer.php?id=' . $donnees['idAvion'] . '">[suppr.]</a> </td><td><strong>' .
+        '<a href="index.php?action=avion&id=' . $donnees['idAvion'] . '">' . htmlspecialchars($donnees['nom']) . '</strong></a></td><td>';
+    echo htmlspecialchars($donnees['autresDetails']) . '</td><td>' . htmlspecialchars($donnees['nbreSieges']) . ' sièges</td></tr>';
+}
 
-    $reponse->closeCursor();
+$avions->closeCursor();
 
 ?>
 <?php $contenu = ob_get_clean(); ?>
