@@ -6,7 +6,7 @@ try {
     die('Erreur : ' . $e->getMessage());
 }
 
-// Insertion de l'avion à l'aide d'une requête préparée
+// Modification de l'avion à l'aide d'une requête préparée
 $req = $bdd->prepare('UPDATE avion SET nom = ?, autresDetails = ?, nbreSieges = ? WHERE idAvion = ?');
 $req->execute(array($_POST['nom'], $_POST['autresDetails'], $_POST['nbreSieges'], $_POST['idAvion']));
 

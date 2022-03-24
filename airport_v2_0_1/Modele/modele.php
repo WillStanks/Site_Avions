@@ -45,3 +45,45 @@ function getBdd(){
 
     return $bdd;
 }
+
+// Permet d'ajouter un avion.
+function setAvion($avion){
+    $bdd = getBdd();
+
+    // Insertion de l'avion à l'aide d'une requête préparée
+    $req = $bdd->prepare('INSERT INTO avion (idAvion, nom, autresDetails, nbreSieges) VALUES(?, ?, ?, ?)');
+    $req->execute(array($avion['idAvion'], $avion['nom'], $avion['autresDetails'], $avion['nbreSieges']));
+    
+    return $req;
+}
+
+// Permet de supprimer un avion.
+function deleteAvion($idAvion){
+    $bdd = getBdd();
+
+    // Suppression de l'avion à l'aide d'une requête préparée
+    $req = $bdd->prepare('DELETE FROM avion WHERE idAvion = ?');
+    $req->execute(array($idAvion));
+
+    return $req;
+}
+
+// Permet de modifier un avion.
+function modifAvion($avion){
+    $bdd = getBdd();
+
+    // Modification de l'avion à l'aide d'une requête préparée
+    $req = $bdd->prepare('UPDATE avion SET nom = ?, autresDetails = ?, nbreSieges = ? WHERE idAvion = ?');
+    $req->execute(array($avion['nom'], $avion['autresDetails'], $avion['nbreSieges'], $avion['idAvion']));
+
+    return $req;
+}
+
+function setReservation($reservation){
+    $bdd = getBdd();
+
+    $result = $bdd->prepare('INSERT INTO donnees_reservations (idDonnee, idAvion, idAeroport, idUtilisateur) VALUES(?, ?, ?, ?)');
+    $result->execute(array($reservation['idDonnee'], $reservation['idAvion'], $reservation['idAeroport'], $reservation['idUtilisateur']));
+
+    return $result;
+}

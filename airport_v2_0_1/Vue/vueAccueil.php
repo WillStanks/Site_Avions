@@ -2,7 +2,8 @@
 
 <?php ob_start(); ?>
 
-
+<a href="index.php?action=nouveauAvion">Ajouter un avion</a>
+<a href="index.php?action=nouvelleReserv">Ajouter une réservation</a>
 <table>
     <tr>
         <th>Actions</th>
@@ -16,8 +17,8 @@
 // Affichage de chaque avion (toutes les données sont protégées par htmlspecialchars)
 while ($donnees = $avions->fetch()) {
     echo '<tr><td>' .
-        '<p><a href="avion_modifier.php?id=' . $donnees['idAvion'] . '">[mod.]</a> ' .
-        '<a href="avion_confirmer.php?id=' . $donnees['idAvion'] . '">[suppr.]</a> </td><td><strong>' .
+        '<p><a href="index.php?action=confirmerModif&id=' . $donnees['idAvion'] . '">[mod.]</a> ' .
+        '<a href="index.php?action=confirmerSupp&id=' . $donnees['idAvion'] . '">[suppr.]</a> </td><td><strong>' .
         '<a href="index.php?action=avion&id=' . $donnees['idAvion'] . '">' . htmlspecialchars($donnees['nom']) . '</strong></a></td><td>';
     echo htmlspecialchars($donnees['autresDetails']) . '</td><td>' . htmlspecialchars($donnees['nbreSieges']) . ' sièges</td></tr>';
 }
