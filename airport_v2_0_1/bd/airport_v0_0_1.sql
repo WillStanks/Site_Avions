@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 19, 2022 at 07:56 PM
+-- Generation Time: Mar 25, 2022 at 01:54 PM
 -- Server version: 8.0.27
 -- PHP Version: 7.4.27
 
@@ -81,7 +81,10 @@ CREATE TABLE `donnees_reservations` (
 --
 
 INSERT INTO `donnees_reservations` (`idDonnee`, `idAvion`, `idAeroport`, `idUtilisateur`) VALUES
-(1, 1, 1, 1);
+(1, 1, 1, 1),
+(2, 3, 2, 1),
+(3, 2, 1, 1),
+(4, 1, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -150,13 +153,13 @@ ALTER TABLE `aeroport`
 -- AUTO_INCREMENT for table `avion`
 --
 ALTER TABLE `avion`
-  MODIFY `idAvion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idAvion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `donnees_reservations`
 --
 ALTER TABLE `donnees_reservations`
-  MODIFY `idDonnee` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idDonnee` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `utilisateurs`

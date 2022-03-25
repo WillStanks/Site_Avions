@@ -3,7 +3,6 @@
 <?php ob_start(); ?>
 
 <a href="index.php?action=nouveauAvion">Ajouter un avion</a>
-<a href="index.php?action=nouvelleReserv">Ajouter une réservation</a>
 <table>
     <tr>
         <th>Actions</th>

@@ -18,50 +18,60 @@ function avion($idAvion)
 }
 
 // Fait l'ajout sur le formulaire.
-function nouveauAvion(){
+function nouveauAvion()
+{
     require "Vue/vueAjouterAvion.php";
 }
 
 // Fait l'ajout en SQL.
-function insertAvion($avion){
+function insertAvion($avion)
+{
     setAvion($avion);
     // Redirection du visiteur vers la page d'accueil
     header('Location: index.php');
 }
 
 // Fait la suppression en SQL.
-function supprimerAvion($idAvion){
+function supprimerAvion($idAvion)
+{
     deleteAvion($idAvion);
 
     header('Location: index.php');
 }
 
 // Fait la suppression sur le formulaire.
-function confirmerSupp($idAvion){
+function confirmerSupp($idAvion)
+{
     $donnees = getAvion($idAvion);
     require "Vue/vueSupprimer.php";
 }
 
 // Fait la modification en SQL.
-function modifierAvion($avion){
+function modifierAvion($avion)
+{
     modifAvion($avion);
 
     header('Location: index.php');
 }
 
 // Fait la modification sur le formulaire.
-function confirmerModif($idAvion){
+function confirmerModif($idAvion)
+{
     $donnees = getAvion($idAvion);
     require "Vue/vueModification.php";
 }
 
-function insertReserv($reservation){
+function insertReserv($reservation)
+{
+    // vérifier si l'avion existe existe;
+    $avion = getAvion($reservation['idAvion']);
     setReservation($reservation);
 
-    header('Location: index.php');
+    header('Location: index.php?action=avion&id=' . $reservation['idAvion']);
 }
 
-function nouvelleReserv(){
+function nouvelleReserv($idAvion)
+{
     require "Vue/vueAjouterReservation.php";
 }
 

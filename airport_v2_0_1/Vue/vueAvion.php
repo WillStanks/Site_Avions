@@ -14,6 +14,7 @@
   <p>Id de l'aeroport : <?= $reserv['idAeroport'] ?></p>
   <p>Id de l'utilisateur : <?= $reserv['idUtilisateur'] ?></p>
 <?php endforeach; ?>
+<a href="index.php?action=nouvelleReserv&idAvion=<?= $avion['idAvion'] ?>"> Ajouter une réservation</a>
 <?php $contenu = ob_get_clean(); ?>
 
 <?php require 'Vue/gabarit.php'; ?>
