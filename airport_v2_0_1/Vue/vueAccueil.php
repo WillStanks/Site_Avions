@@ -2,6 +2,8 @@
 
 <?php ob_start(); ?>
 
+<h1 data-i18n="ListeAvions">Liste des avions disponibles</h1>
+
 <a href="index.php?action=nouveauAvion">Ajouter un avion</a>
 <table>
     <tr>
@@ -19,7 +21,8 @@ while ($donnees = $avions->fetch()) {
         '<p><a href="index.php?action=confirmerModif&id=' . $donnees['idAvion'] . '">[mod.]</a> ' .
         '<a href="index.php?action=confirmerSupp&id=' . $donnees['idAvion'] . '">[suppr.]</a> </td><td><strong>' .
         '<a href="index.php?action=avion&id=' . $donnees['idAvion'] . '">' . htmlspecialchars($donnees['nom']) . '</strong></a></td><td>';
-    echo htmlspecialchars($donnees['autresDetails']) . '</td><td>' . htmlspecialchars($donnees['nbreSieges']) . ' sièges</td></tr>';
+    echo htmlspecialchars($donnees['autresDetails']) . '</td><td>' . htmlspecialchars($donnees['nbreSieges']) . ' sièges</td><td> Site de l\'avion'
+        . htmlspecialchars($donnees['urlModele']) . '</td></tr>';
 }
 
 $avions->closeCursor();

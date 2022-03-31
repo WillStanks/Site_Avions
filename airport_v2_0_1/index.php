@@ -16,7 +16,8 @@ try {
             } else
                 throw new Exception("Aucun identifiant de l'avion");
         } else if ($_GET['action'] == 'nouveauAvion') {
-            nouveauAvion();
+            $erreur = isset($_GET['erreur']) ? $_GET['erreur'] : '';
+            nouveauAvion($erreur);
         } else if ($_GET['action'] == 'insertAvion') {
             $avion = $_POST;
             insertAvion($avion);
@@ -66,7 +67,8 @@ try {
                 // intval renvoie la valeur numérique du paramètre ou 0 en cas d'échec
                 $idAvion = intval($_GET['idAvion']);
                 if ($idAvion != 0) {
-                    nouvelleReserv($idAvion);
+                    $erreur = isset($_GET['erreur']) ? $_GET['erreur'] : '';
+                    nouvelleReserv($idAvion, $erreur);
                 } else
                     throw new Exception("Identifiant de l'avion incorrect");
             } else
@@ -84,6 +86,8 @@ try {
                     throw new Exception("Identifiant d'avion incorrect");
             } else
                 throw new Exception("Aucun identifiant d'avion");
+        } else if($_GET['action'] == 'quelsTypes') {
+            quelsTypes($_GET['term']);
         } else {
             throw new Exception("Action non valide");
         }

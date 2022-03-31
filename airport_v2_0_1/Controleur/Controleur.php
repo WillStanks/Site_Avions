@@ -18,7 +18,7 @@ function avion($idAvion)
 }
 
 // Fait l'ajout sur le formulaire.
-function nouveauAvion()
+function nouveauAvion($erreur)
 {
     require "Vue/vueAjouterAvion.php";
 }
@@ -26,9 +26,18 @@ function nouveauAvion()
 // Fait l'ajout en SQL.
 function insertAvion($avion)
 {
-    setAvion($avion);
-    // Redirection du visiteur vers la page d'accueil
-    header('Location: index.php');
+    $dataAvion = $_POST;
+
+    $validation_url = filter_var($dataAvion['urlModele'], FILTER_VALIDATE_URL);
+    if($validation_url){
+        setAvion($avion);
+        // Redirection du visiteur vers la page d'accueil
+        header('Location: index.php');
+    } else {
+        // Recharge la page avec une erreur de URL.
+        header('Location: index.php?action=nouveauAvion' . '&erreur=urlModele');
+    }
+   
 }
 
 // Fait la suppression en SQL.
@@ -73,13 +82,17 @@ function insertReserv($reservation)
         header('Location: index.php?action=avion&id=' . $reservation['idAvion']);
     } else {
         // Recharge la page avec une erreur de courriel
-        header('Location: index.php?action=avion&id=' . $dataReserv['id'] . '&erreur=courriel');
+        header('Location: index.php?action=nouvelleReserv&idAvion=' . $dataReserv['idAvion'] . '&erreur=courriel');
     }
 }
 
-function nouvelleReserv($idAvion)
+function nouvelleReserv($idAvion, $erreur)
 {
     require "Vue/vueAjouterReservation.php";
+}
+
+function quelsTypes($term){
+    echo searchType($term);
 }
 
 // Affiche une erreur

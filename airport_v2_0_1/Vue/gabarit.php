@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="Contenu/style.css" />
     <title><?= $titre ?></title>
 </head>
@@ -27,12 +28,11 @@
             <?= $contenu ?>
         </div>
 
-        <footer id="pied">
-            Site réalisé avec PHP, HTML5 et CSS.
-        </footer>
+        <span id="pied" data-i18n="footerGabarit">Site réalisé avec PHP, HTML5 et CSS.</span>
     </div>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script src="Contenu/js/autocompleteType.js"></script>
     <script src="Contenu/jquery.i18n/src/CLDRPluralRuleParser.js"></script>
     <script src="Contenu/jquery.i18n/src/jquery.i18n.js"></script>

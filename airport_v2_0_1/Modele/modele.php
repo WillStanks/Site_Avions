@@ -37,7 +37,7 @@ function getReservations($idAvion){
 function getBdd(){
     // Connexion à la base de données
     try {
-        $bdd = new PDO('mysql:host=localhost;dbname=airport_v0_0_1;charset=utf8', 'root', 'mysql', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        $bdd = new PDO('mysql:host=localhost;dbname=airport_v2_1_3;charset=utf8', 'root', 'mysql', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     } catch (Exception $e) {
         $msgErreur = $e->getMessage();
         require 'Vue/vueErreur.php';
@@ -51,9 +51,8 @@ function setAvion($avion){
     $bdd = getBdd();
 
     // Insertion de l'avion à l'aide d'une requête préparée
-    $req = $bdd->prepare('INSERT INTO avion (idAvion, nom, autresDetails, nbreSieges) VALUES(?, ?, ?, ?)');
-    $req->execute(array($avion['idAvion'], $avion['nom'], $avion['autresDetails'], $avion['nbreSieges']));
-    
+    $req = $bdd->prepare('INSERT INTO avion (nom, autresDetails, nbreSieges, urlModele) VALUES(?, ?, ?, ?)');
+    $req->execute(array($avion['nom'], $avion['autresDetails'], $avion['nbreSieges'], $avion['urlModele']));
     return $req;
 }
 
@@ -73,8 +72,8 @@ function modifAvion($avion){
     $bdd = getBdd();
 
     // Modification de l'avion à l'aide d'une requête préparée
-    $req = $bdd->prepare('UPDATE avion SET nom = ?, autresDetails = ?, nbreSieges = ? WHERE idAvion = ?');
-    $req->execute(array($avion['nom'], $avion['autresDetails'], $avion['nbreSieges'], $avion['idAvion']));
+    $req = $bdd->prepare('UPDATE avion SET nom = ?, autresDetails = ?, nbreSieges = ?, urlModele = ? WHERE idAvion = ?');
+    $req->execute(array($avion['nom'], $avion['autresDetails'], $avion['nbreSieges'], $avion['urlModele'], $avion['idAvion']));
 
     return $req;
 }
@@ -82,8 +81,20 @@ function modifAvion($avion){
 function setReservation($reservation){
     $bdd = getBdd();
 
-    $result = $bdd->prepare('INSERT INTO donnees_reservations (idDonnee, idAvion, idAeroport, idUtilisateur) VALUES(?, ?, ?, ?)');
-    $result->execute(array($reservation['idDonnee'], $reservation['idAvion'], $reservation['idAeroport'], $reservation['idUtilisateur']));
+    $result = $bdd->prepare('INSERT INTO donnees_reservations (idDonnee, idAvion, idAeroport, idUtilisateur, courriel) VALUES(?, ?, ?, ?, ?)');
+    $result->execute(array($reservation['idDonnee'], $reservation['idAvion'], $reservation['idAeroport'], $reservation['idUtilisateur'], $reservation['courriel']));
 
     return $result;
+}
+
+function searchType($term){
+    $bdd = getBdd();
+    $stmt = $bdd->prepare('SELECT nomAvion FROM types_avion WHERE nomAvion LIKE :term');
+    $stmt->execute(array('term' => '%' . $term . '%'));
+
+    while ($row = $stmt->fetch()){
+        $return_arr[] = $row['nomAvion'];
+    }
+
+    return json_encode($return_arr);
 }
