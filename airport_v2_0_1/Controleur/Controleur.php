@@ -63,11 +63,18 @@ function confirmerModif($idAvion)
 
 function insertReserv($reservation)
 {
-    // vérifier si l'avion existe existe;
+    // Vérifier si l'avion existe existe;
     $avion = getAvion($reservation['idAvion']);
-    setReservation($reservation);
-
-    header('Location: index.php?action=avion&id=' . $reservation['idAvion']);
+    // Récupérer les données du formulaire
+    $dataReserv = $_POST;
+    $validation_courriel = filter_var($dataReserv['courriel'], FILTER_VALIDATE_EMAIL);
+    if ($validation_courriel) {
+        setReservation($reservation);
+        header('Location: index.php?action=avion&id=' . $reservation['idAvion']);
+    } else {
+        // Recharge la page avec une erreur de courriel
+        header('Location: index.php?action=avion&id=' . $dataReserv['id'] . '&erreur=courriel');
+    }
 }
 
 function nouvelleReserv($idAvion)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 25, 2022 at 01:54 PM
+-- Generation Time: Mar 31, 2022 at 01:56 PM
 -- Server version: 8.0.27
 -- PHP Version: 7.4.27
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `airport_v0_0_1`
+-- Database: `airport_v2_1_3`
 --
 
 -- --------------------------------------------------------
@@ -49,8 +49,8 @@ INSERT INTO `aeroport` (`id`, `nom`, `autresDetails`) VALUES
 
 CREATE TABLE `avion` (
   `idAvion` int NOT NULL,
-  `nom` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `autresDetails` text COLLATE utf8mb4_general_ci NOT NULL,
+  `nom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `autresDetails` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `nbreSieges` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -73,18 +73,19 @@ CREATE TABLE `donnees_reservations` (
   `idDonnee` int NOT NULL,
   `idAvion` int NOT NULL,
   `idAeroport` int NOT NULL,
-  `idUtilisateur` int NOT NULL
+  `idUtilisateur` int NOT NULL,
+  `courriel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `donnees_reservations`
 --
 
-INSERT INTO `donnees_reservations` (`idDonnee`, `idAvion`, `idAeroport`, `idUtilisateur`) VALUES
-(1, 1, 1, 1),
-(2, 3, 2, 1),
-(3, 2, 1, 1),
-(4, 1, 2, 2);
+INSERT INTO `donnees_reservations` (`idDonnee`, `idAvion`, `idAeroport`, `idUtilisateur`, `courriel`) VALUES
+(1, 1, 1, 1, ''),
+(2, 3, 2, 1, ''),
+(3, 2, 1, 1, ''),
+(4, 1, 2, 2, '');
 
 -- --------------------------------------------------------
 
@@ -96,8 +97,8 @@ CREATE TABLE `utilisateurs` (
   `id` int NOT NULL,
   `nom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `prenom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `identifiant` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `dateNaissance` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `identifiant` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `dateNaissance` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
