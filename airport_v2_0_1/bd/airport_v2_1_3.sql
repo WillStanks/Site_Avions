@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 31, 2022 at 01:56 PM
--- Server version: 8.0.27
--- PHP Version: 7.4.27
+-- Hôte : localhost
+-- Généré le : jeu. 07 avr. 2022 à 18:25
+-- Version du serveur : 8.0.27
+-- Version de PHP : 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `airport_v2_1_3`
+-- Base de données : `airport_v2_1_3`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `aeroport`
+-- Structure de la table `aeroport`
 --
 
 CREATE TABLE `aeroport` (
@@ -34,7 +34,7 @@ CREATE TABLE `aeroport` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `aeroport`
+-- Déchargement des données de la table `aeroport`
 --
 
 INSERT INTO `aeroport` (`id`, `nom`, `autresDetails`) VALUES
@@ -44,29 +44,30 @@ INSERT INTO `aeroport` (`id`, `nom`, `autresDetails`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `avion`
+-- Structure de la table `avion`
 --
 
 CREATE TABLE `avion` (
   `idAvion` int NOT NULL,
   `nom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `autresDetails` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `nbreSieges` int NOT NULL
+  `nbreSieges` int NOT NULL,
+  `urlModele` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `avion`
+-- Déchargement des données de la table `avion`
 --
 
-INSERT INTO `avion` (`idAvion`, `nom`, `autresDetails`, `nbreSieges`) VALUES
-(1, 'Airbus A330-200 S', 'Moteurs : 3 Rolls Royce Trent 772B |||\r\nCapacité du réservoir à carburant : 111 272 kg (245 316 lb) |||\r\nVitesse de croisière : 875 km/h (Mach 0,82)', 4000),
-(2, 'Airbus A330-30', 'Moteurs : 2 Rolls Royce Trent 772 |||\r\nCapacité du réservoir à carburant : 76 839 kg (169 403 lb) |||\r\nVitesse de croisière : 870 km/h (Mach 0,82)', 375),
-(3, 'Airbus A321-200 (A321ceo)', 'Moteurs : 2 GE CFM56-5B3 |||\r\nCapacité du réservoir à carburant : 24 050 l |||\r\nVitesse de croisière : 871 km/h', 190);
+INSERT INTO `avion` (`idAvion`, `nom`, `autresDetails`, `nbreSieges`, `urlModele`) VALUES
+(1, 'Airbus A330-200 S', 'Moteurs : 3 Rolls Royce Trent 772B |||\r\nCapacité du réservoir à carburant : 111 272 kg (245 316 lb) |||\r\nVitesse de croisière : 875 km/h (Mach 0,82)', 4000, 'http://www.mostov'),
+(2, 'Airbus A330-30', 'Moteurs : 2 Rolls Royce Trent 772 |||\r\nCapacité du réservoir à carburant : 76 839 kg (169 403 lb) |||\r\nVitesse de croisière : 870 km/h (Mach 0,82)', 375, 'http://www.mostov'),
+(3, 'Airbus A321-200 (A321ceo)', 'Moteurs : 2 GE CFM56-5B3 |||\r\nCapacité du réservoir à carburant : 24 050 l |||\r\nVitesse de croisière : 871 km/h', 190, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `donnees_reservations`
+-- Structure de la table `donnees_reservations`
 --
 
 CREATE TABLE `donnees_reservations` (
@@ -78,19 +79,42 @@ CREATE TABLE `donnees_reservations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `donnees_reservations`
+-- Déchargement des données de la table `donnees_reservations`
 --
 
 INSERT INTO `donnees_reservations` (`idDonnee`, `idAvion`, `idAeroport`, `idUtilisateur`, `courriel`) VALUES
 (1, 1, 1, 1, ''),
 (2, 3, 2, 1, ''),
 (3, 2, 1, 1, ''),
-(4, 1, 2, 2, '');
+(4, 1, 2, 2, ''),
+(5, 1, 2, 2, 'william4800@hotmail.com'),
+(6, 2, 2, 2, 'JeanPing@hotmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateurs`
+-- Structure de la table `types_avion`
+--
+
+CREATE TABLE `types_avion` (
+  `id` int NOT NULL,
+  `nomAvion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `types_avion`
+--
+
+INSERT INTO `types_avion` (`id`, `nomAvion`) VALUES
+(1, 'Airbus A321-200 (A321ceo)'),
+(2, 'Airbus A321neoLR'),
+(3, 'Airbus A330-200'),
+(4, 'Airbus A330-300');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateurs`
 --
 
 CREATE TABLE `utilisateurs` (
@@ -102,7 +126,7 @@ CREATE TABLE `utilisateurs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `utilisateurs`
+-- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `identifiant`, `dateNaissance`) VALUES
@@ -110,23 +134,23 @@ INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `identifiant`, `dateNaissance
 (2, 'Mac', 'Paul', 'Pm29-', '');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `aeroport`
+-- Index pour la table `aeroport`
 --
 ALTER TABLE `aeroport`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `avion`
+-- Index pour la table `avion`
 --
 ALTER TABLE `avion`
   ADD PRIMARY KEY (`idAvion`);
 
 --
--- Indexes for table `donnees_reservations`
+-- Index pour la table `donnees_reservations`
 --
 ALTER TABLE `donnees_reservations`
   ADD PRIMARY KEY (`idDonnee`),
@@ -135,45 +159,57 @@ ALTER TABLE `donnees_reservations`
   ADD KEY `idUtilisateur` (`idUtilisateur`);
 
 --
--- Indexes for table `utilisateurs`
+-- Index pour la table `types_avion`
+--
+ALTER TABLE `types_avion`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `aeroport`
+-- AUTO_INCREMENT pour la table `aeroport`
 --
 ALTER TABLE `aeroport`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `avion`
+-- AUTO_INCREMENT pour la table `avion`
 --
 ALTER TABLE `avion`
-  MODIFY `idAvion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idAvion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `donnees_reservations`
+-- AUTO_INCREMENT pour la table `donnees_reservations`
 --
 ALTER TABLE `donnees_reservations`
-  MODIFY `idDonnee` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idDonnee` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `utilisateurs`
+-- AUTO_INCREMENT pour la table `types_avion`
+--
+ALTER TABLE `types_avion`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `donnees_reservations`
+-- Contraintes pour la table `donnees_reservations`
 --
 ALTER TABLE `donnees_reservations`
   ADD CONSTRAINT `donnees_reservations_ibfk_1` FOREIGN KEY (`idAeroport`) REFERENCES `aeroport` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
