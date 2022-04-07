@@ -22,7 +22,7 @@
         </header>
         <h2>Avions Air Transat V3.0.3</h2>
 
-        <a href="Vue/a_propos.html">À propos</a></br>
+        <a href="index.php?action=aPropos">À propos</a></br>
 
         <div id="contenu">
             <?= $contenu ?>

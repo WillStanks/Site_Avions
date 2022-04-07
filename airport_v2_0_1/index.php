@@ -57,7 +57,8 @@ try {
                 // intval renvoie la valeur numérique du paramètre ou 0 en cas d'échec
                 $id = intval($_GET['id']);
                 if ($id != 0) {
-                    confirmerModif($id);
+                    $erreur = isset($_GET['erreur']) ? $_GET['erreur'] : '';
+                    confirmerModif($id, $erreur);
                 } else
                     throw new Exception("Identifiant de l'avion incorrect");
             } else
@@ -88,6 +89,8 @@ try {
                 throw new Exception("Aucun identifiant d'avion");
         } else if($_GET['action'] == 'quelsTypes') {
             quelsTypes($_GET['term']);
+        } else if($_GET['action'] == 'aPropos'){
+            aPropos();
         } else {
             throw new Exception("Action non valide");
         }

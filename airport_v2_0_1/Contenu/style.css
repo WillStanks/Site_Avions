@@ -13,6 +13,10 @@ h1 {
   color: white;
 }
 
+.nomAvion {
+  margin-bottom : 0px;
+}
+
 #global {
   min-height: 100%; /* Voir commentaire sur html et body plus haut */
   background: #333534;

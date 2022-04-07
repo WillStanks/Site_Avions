@@ -58,13 +58,22 @@ function confirmerSupp($idAvion)
 // Fait la modification en SQL.
 function modifierAvion($avion)
 {
-    modifAvion($avion);
+    $dataAvion = $_POST;
 
-    header('Location: index.php');
+    $validation_url = filter_var($dataAvion['urlModele'], FILTER_VALIDATE_URL);
+    if($validation_url){
+        modifAvion($avion);
+        // Redirection du visiteur vers la page d'accueil
+        header('Location: index.php');
+    } else {
+        // Recharge la page avec une erreur de URL.
+        header('Location: index.php?action=confirmerModif&id=' . $dataAvion['idAvion'] . '&erreur=urlModele');
+    }
+    
 }
 
 // Fait la modification sur le formulaire.
-function confirmerModif($idAvion)
+function confirmerModif($idAvion, $erreur)
 {
     $donnees = getAvion($idAvion);
     require "Vue/vueModification.php";
@@ -93,6 +102,10 @@ function nouvelleReserv($idAvion, $erreur)
 
 function quelsTypes($term){
     echo searchType($term);
+}
+
+function aPropos(){
+    require "Vue/a_propos.php";
 }
 
 // Affiche une erreur
