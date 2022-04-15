@@ -23,6 +23,9 @@
         <h2>Avions Air Transat V3.0.3</h2>
 
         <a href="index.php?action=aPropos">À propos</a></br>
+        <a href="tests.php">
+            <h3>TESTS</h3>
+        </a>
 
         <div id="contenu">
             <?= $contenu ?>

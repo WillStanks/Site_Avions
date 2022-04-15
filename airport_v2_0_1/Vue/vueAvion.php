@@ -1,6 +1,5 @@
 <?php $titre = "Mon avion - " . $avion['nom']; ?>
 
-<?php ob_start(); ?>
 
 <header>
   <h1 class="nomAvion"><?= $avion['nom'] ?></h1>
@@ -17,6 +16,3 @@
   <p>Courriel de la réservation : <?= $reserv['courriel'] ?></p>
 <?php endforeach; ?>
 <a href="index.php?action=nouvelleReserv&idAvion=<?= $avion['idAvion'] ?>"> Ajouter une réservation</a>
-<?php $contenu = ob_get_clean(); ?>
-
-<?php require 'Vue/gabarit.php'; ?>

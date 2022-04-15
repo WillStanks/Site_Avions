@@ -1,7 +1,5 @@
 <?php $titre = 'Liste des avions'; ?>
 
-<?php ob_start(); ?>
-
 <h1 data-i18n="ListeAvions">Liste des avions disponibles</h1>
 
 <a href="index.php?action=nouveauAvion">Ajouter un avion</a>
@@ -26,7 +24,3 @@ while ($donnees = $avions->fetch()) {
 }
 
 $avions->closeCursor();
-
-?>
-<?php $contenu = ob_get_clean(); ?>
-<?php require 'Vue/gabarit.php'; ?>
