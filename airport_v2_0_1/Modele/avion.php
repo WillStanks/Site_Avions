@@ -18,7 +18,7 @@ class avion extends modele
     function getAvion($idAvion)
     {
         $sql = 'SELECT * FROM avion WHERE idAvion = ?';
-        $avion = $this->executerRequete($sql);
+        $avion = $this->executerRequete($sql, [$idAvion]);
 
         if ($avion->rowCount() == 1)
             return $avion->fetch();  // Accès à la première ligne de résultat

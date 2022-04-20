@@ -14,13 +14,11 @@
 
 <?php
 // Affichage de chaque avion (toutes les données sont protégées par htmlspecialchars)
-while ($donnees = $avions->fetch()) {
+foreach ($avions as $avion) {
     echo '<tr><td>' .
-        '<p><a href="index.php?action=confirmerModif&id=' . $donnees['idAvion'] . '">[mod.]</a> ' .
-        '<a href="index.php?action=confirmerSupp&id=' . $donnees['idAvion'] . '">[suppr.]</a> </td><td><strong>' .
-        '<a href="index.php?action=avion&id=' . $donnees['idAvion'] . '">' . htmlspecialchars($donnees['nom']) . '</strong></a></td><td>';
-    echo htmlspecialchars($donnees['autresDetails']) . '</td><td>' . htmlspecialchars($donnees['nbreSieges']) . ' sièges</td><td> Site de l\'avion'
-        . htmlspecialchars($donnees['urlModele']) . '</td></tr>';
+        '<p><a href="index.php?action=confirmerModif&id=' . $avion['idAvion'] . '">[mod.]</a> ' .
+        '<a href="index.php?action=confirmerSupp&id=' . $avion['idAvion'] . '">[suppr.]</a> </td><td><strong>' .
+        '<a href="index.php?action=avion&id=' . $avion['idAvion'] . '">' . htmlspecialchars($avion['nom']) . '</strong></a></td><td>';
+    echo htmlspecialchars($avion['autresDetails']) . '</td><td>' . htmlspecialchars($avion['nbreSieges']) . ' sièges</td><td> Site de l\'avion'
+        . htmlspecialchars($avion['urlModele']) . '</td></tr>';
 }
-
-$avions->closeCursor();
