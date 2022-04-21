@@ -1,6 +1,55 @@
 <?php
 
-require 'Modele/modele.php';
+require_once 'Requete.php';
+require_once 'Vue.php';
+
+abstract class Controleur
+{
+
+    // Action à réaliser
+    private $action;
+
+    // Requête entrante
+    protected $requete;
+
+    // Définit la requête entrante
+    public function setRequete(Requete $requete)
+    {
+        $this->requete = $requete;
+    }
+
+    // Exécute l'action à réaliser
+    public function executerAction($action)
+    {
+        if (method_exists($this, $action)) {
+            $this->action = $action;
+            $this->{$this->action}();
+        } else {
+            $classeControleur = get_class($this);
+            throw new Exception("Action '$action' non définie dans la classe $classeControleur");
+        }
+    }
+
+    // Méthode abstraite correspondant à l'action par défaut
+    // Oblige les classes dérivées à implémenter cette action par défaut
+    public abstract function index();
+
+    // Génère la vue associée au contrôleur courant
+    protected function genererVue($donneesVue = array())
+    {
+        // Détermination du nom du fichier vue à partir du nom du contrôleur actuel
+        $classeControleur = get_class($this);
+        $controleur = str_replace("Controleur", "", $classeControleur);
+        // Instanciation et génération de la vue
+        $vue = new Vue($this->action, $controleur);
+        $vue->generer($donneesVue);
+    }
+}
+
+
+
+/*
+require 'Framework/modele.php';
 
 // Affiche la liste de tous les avions
 function accueil()
@@ -29,7 +78,7 @@ function insertAvion($avion)
     $dataAvion = $_POST;
 
     $validation_url = filter_var($dataAvion['urlModele'], FILTER_VALIDATE_URL);
-    if($validation_url){
+    if ($validation_url) {
         setAvion($avion);
         // Redirection du visiteur vers la page d'accueil
         header('Location: index.php');
@@ -37,7 +86,6 @@ function insertAvion($avion)
         // Recharge la page avec une erreur de URL.
         header('Location: index.php?action=nouveauAvion' . '&erreur=urlModele');
     }
-   
 }
 
 // Fait la suppression en SQL.
@@ -61,7 +109,7 @@ function modifierAvion($avion)
     $dataAvion = $_POST;
 
     $validation_url = filter_var($dataAvion['urlModele'], FILTER_VALIDATE_URL);
-    if($validation_url){
+    if ($validation_url) {
         modifAvion($avion);
         // Redirection du visiteur vers la page d'accueil
         header('Location: index.php');
@@ -69,7 +117,6 @@ function modifierAvion($avion)
         // Recharge la page avec une erreur de URL.
         header('Location: index.php?action=confirmerModif&id=' . $dataAvion['idAvion'] . '&erreur=urlModele');
     }
-    
 }
 
 // Fait la modification sur le formulaire.
@@ -100,11 +147,13 @@ function nouvelleReserv($idAvion, $erreur)
     require "Vue/vueAjouterReservation.php";
 }
 
-function quelsTypes($term){
+function quelsTypes($term)
+{
     echo searchType($term);
 }
 
-function aPropos(){
+function aPropos()
+{
     require "Vue/a_propos.php";
 }
 
@@ -113,3 +162,4 @@ function erreur($msgErreur)
 {
     require 'Vue/vueErreur.php';
 }
+*/

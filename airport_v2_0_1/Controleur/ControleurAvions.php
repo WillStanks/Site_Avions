@@ -1,9 +1,9 @@
 <?php
 
+require_once 'Framework/Controleur.php';
 require_once 'Modele/avion.php';
-require_once 'Vue/Vue.php';
 
-class ControleurAvion
+class ControleurAvions extends Controleur
 {
     private $avion;
 
@@ -12,10 +12,9 @@ class ControleurAvion
         $this->avion = new Avion();
     }
 
-    public function avions()
+    public function index()
     {
         $avions = $this->avion->getAvions();
-        $vue = new Vue("Avions");
-        $vue->generer(array('avions' => $avions));
+        $this->genererVue(array('avions' => $avions));
     }
 }

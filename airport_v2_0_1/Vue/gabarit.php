@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <base href="<?= $racineWeb ?>">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="Contenu/style.css" />
     <title><?= $titre ?></title>
