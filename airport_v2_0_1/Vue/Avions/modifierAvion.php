@@ -1,7 +1,7 @@
 <?php $titre = "Modification d'un avion"; ?>
 
 
-<form action="index.php?action=modifierAvion" method="post">
+<form action="Avions/miseAJourAvion" method="post">
     <h2>Modifier un avion V0.3.1</h2>
     <p>
         <label for="nom">Nom de l'avion</label> : <input type="text" name="nom" id="nom" value="<?php echo htmlspecialchars($donnees['nom']); ?>" /><br />

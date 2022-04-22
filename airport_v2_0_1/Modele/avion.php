@@ -2,11 +2,11 @@
 
 require_once 'Framework/modele.php';
 
-class avion extends modele
+class Avion extends modele
 {
 
     // Renvoie la liste de tous les avions.
-    function getAvions()
+    public function getAvions()
     {
         $sql = 'SELECT * FROM avion';
         $reponse = $this->executerRequete($sql);

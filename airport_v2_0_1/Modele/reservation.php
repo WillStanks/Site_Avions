@@ -2,10 +2,10 @@
 
 require_once 'Framework/modele.php';
 
-class reservation extends modele
+class Reservation extends modele
 {
 
-    function getReservations($idAvion)
+    function getReservations($idAvion = NULL)
     {
         $sql = 'SELECT * FROM donnees_reservations WHERE idAvion = ?';
         $reservations = $this->executerRequete($sql, array($idAvion));

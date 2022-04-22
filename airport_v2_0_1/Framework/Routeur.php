@@ -1,15 +1,30 @@
 <?php
 
+require_once 'Configuration.php';
+require_once 'Controleur.php';
 require_once 'Requete.php';
-require_once 'Framework/Vue.php';
+require_once 'Vue.php';
 
-class Routeur
-{
-    // Route une requête entrante : exécute l'action associée
-    public function routerRequete()
-    {
+/*
+ * Classe de routage des requêtes entrantes.
+ * 
+ * Inspirée du framework PHP de Nathan Davison
+ * (https://github.com/ndavison/Nathan-MVC)
+ * 
+ * @version 1.0
+ * @author Baptiste Pesquet
+ */
+
+class Routeur {
+
+    /**
+     * Méthode principale appelée par le contrôleur frontal
+     * Examine la requête et exécute l'action appropriée
+     */
+    public function routerRequete() {
         try {
             // Fusion des paramètres GET et POST de la requête
+            // Permet de gérer uniformément ces deux types de requête HTTP
             $requete = new Requete(array_merge($_GET, $_POST));
 
             $controleur = $this->creerControleur($requete);
@@ -21,16 +36,25 @@ class Routeur
         }
     }
 
-    // Crée le contrôleur approprié en fonction de la requête reçue
-    private function creerControleur(Requete $requete)
-    {
-        $controleur = "Avions"; // Controleur par défaut
+    /**
+     * Instancie le contrôleur approprié en fonction de la requête reçue
+     * 
+     * @param Requete $requete Requête reçue
+     * @return Instance d'un contrôleur
+     * @throws Exception Si la création du contrôleur échoue
+     */
+    private function creerControleur(Requete $requete) {
+        // Grâce à la redirection, toutes les URL entrantes sont du type :
+        // index.php?controleur=XXX&action=YYY&id=ZZZ
+        $ctrlAccueil = Configuration::get("defaut");
+        $controleur = $ctrlAccueil;  // Contrôleur par défaut
         if ($requete->existeParametre('controleur')) {
             $controleur = $requete->getParametre('controleur');
-            // Premiere lettre en majuscule
+            // Première lettre en majuscules
             $controleur = ucfirst(strtolower($controleur));
         }
-        // Creation du nom du fichier du controleur
+        // Création du nom du fichier du contrôleur
+        // La convention de nommage des fichiers controleurs est : Controleur/Controleur<$controleur>.php
         $classeControleur = "Controleur" . $controleur;
         $fichierControleur = "Controleur/" . $classeControleur . ".php";
         if (file_exists($fichierControleur)) {
@@ -39,13 +63,18 @@ class Routeur
             $controleur = new $classeControleur();
             $controleur->setRequete($requete);
             return $controleur;
-        } else
+        } else {
             throw new Exception("Fichier '$fichierControleur' introuvable");
+        }
     }
 
-    // Détermine l'action à exécuter en fonction de la requête reçue
-    private function creerAction(Requete $requete)
-    {
+    /**
+     * Détermine l'action à exécuter en fonction de la requête reçue
+     * 
+     * @param Requete $requete Requête reçue
+     * @return string Action à exécuter
+     */
+    private function creerAction(Requete $requete) {
         $action = "index";  // Action par défaut
         if ($requete->existeParametre('action')) {
             $action = $requete->getParametre('action');
@@ -53,10 +82,15 @@ class Routeur
         return $action;
     }
 
-    // Gère une erreur d'exécution (exception)
-    private function gererErreur(Exception $exception)
-    {
+    /**
+     * Gère une erreur d'exécution (exception)
+     * 
+     * @param Exception $exception Exception qui s'est produite
+     */
+    private function gererErreur(Exception $exception) {
         $vue = new Vue('erreur');
-        $vue->generer(array('msgErreur' => $exception->getMessage()));
+        $erreur = $exception->getMessage();
+        $vue->generer(array('msgErreur' => $erreur));
     }
+
 }
