@@ -16,7 +16,7 @@
 // Affichage de chaque avion (toutes les données sont protégées par htmlspecialchars)
 foreach ($avions as $avion) {
     echo '<tr><td>' .
-        '<p><a href="Avions/modifierAvion' . $avion['idAvion'] . '">[mod.]</a> ' .
+        '<p><a href="Avions/modifierAvion/' . $avion['idAvion'] . '">[mod.]</a> ' .
         '<a href="index.php?action=confirmerSupp&id=' . $avion['idAvion'] . '">[suppr.]</a> </td><td><strong>' .
         '<a href="index.php?action=avion&id=' . $avion['idAvion'] . '">' . htmlspecialchars($avion['nom']) . '</strong></a></td><td>';
     echo htmlspecialchars($avion['autresDetails']) . '</td><td>' . htmlspecialchars($avion['nbreSieges']) . ' sièges</td><td> Site de l\'avion'

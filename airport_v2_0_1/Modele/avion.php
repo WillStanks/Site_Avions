@@ -52,7 +52,7 @@ class Avion extends modele
     {
         // Modification de l'avion à l'aide d'une requête préparée
         $sql = 'UPDATE avion SET nom = ?, autresDetails = ?, nbreSieges = ?, urlModele = ? WHERE idAvion = ?';
-        $req = $this->executerRequete($sql, array($avion));
+        $req = $this->executerRequete($sql, [$avion['nom'], $avion['autresDetails'], $avion['nbreSieges'], $avion['urlModele'], $avion['idAvion']]);
 
         return $req;
     }

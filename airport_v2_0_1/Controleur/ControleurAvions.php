@@ -49,7 +49,7 @@ class ControleurAvions extends Controleur
     // Modifier un avion existant    
     public function modifierAvion()
     {
-        $id = $this->requete->getParametreId('idAvion');
+        $id = $this->requete->getParametreId('id');
         $avion = $this->avion->getAvion($id);
         $this->genererVue(['avion' => $avion]);
     }
