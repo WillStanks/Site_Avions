@@ -32,7 +32,7 @@ class Avion extends modele
     {
         // Insertion de l'avion à l'aide d'une requête préparée
         $sql = 'INSERT INTO avion (nom, autresDetails, nbreSieges, urlModele) VALUES(?, ?, ?, ?)';
-        $req = $this->executerRequete($sql, array($avion));
+        $req = $this->executerRequete($sql, [$avion['nom'], $avion['autresDetails'], $avion['nbreSieges'], $avion['urlModele']]);
 
         return $req;
     }
@@ -42,7 +42,7 @@ class Avion extends modele
     {
         // Suppression de l'avion à l'aide d'une requête préparée
         $sql = 'DELETE FROM avion WHERE idAvion = ?';
-        $avion = $this->executerRequete($sql, array($idAvion));
+        $avion = $this->executerRequete($sql, $idAvion);
 
         return $avion;
     }

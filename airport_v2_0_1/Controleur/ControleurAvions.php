@@ -38,7 +38,7 @@ class ControleurAvions extends Controleur
     // Enregistre le nouvel avion et retourne à la liste des avions
     public function ajouter()
     {
-        $avion['nom'] = $this->requete->getParametre('nom');
+        $avion['nom'] = $this->requete->getParametre('nomAvion');
         $avion['autresDetails'] = $this->requete->getParametre('autresDetails');
         $avion['nbreSieges'] = $this->requete->getParametre('nbreSieges');
         $avion['urlModele'] = $this->requete->getParametre('urlModele');
@@ -64,5 +64,21 @@ class ControleurAvions extends Controleur
         $avion['urlModele'] = $this->requete->getParametre('urlModele');
         $this->avion->modifAvion($avion);
         $this->executerAction('index');
+    }
+
+    public function supprimerAvion()
+    {
+        $id = $this->requete->getParametreId('id');
+        $avion = $this->avion->getAvion($id);
+        $this->genererVue(['avion' => $avion]);
+    }
+
+    public function supprimer()
+    {
+        $id = $this->requete->getParametreId('idAvion');
+        $avion = $this->avion->getAvion($id);
+        $this->$avion->deleteAvion($id);
+        $this->executerAction('index');
+        $this->rediriger('Avions');
     }
 }
