@@ -1,7 +1,7 @@
 <?php $titre = "Ajouter une réservation"; ?>
 
 
-<form action="index.php?action=insertReserv" method="post">
+<form action="Reservations/ajouter/" method="post">
     <h2>Ajouter une réservation V0.3.1</h2>
     <p>
         <label for="idAeroport">ID de l'aeroport</label> : <input type="number" name="idAeroport" id="idAeroport" /><br />

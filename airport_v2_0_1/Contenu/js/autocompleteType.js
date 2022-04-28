@@ -2,7 +2,7 @@ $(function() {
 
     //autocomplete
     $("#auto").autocomplete({
-        source: "index.php?action=quelsTypes",
+        source: "index.php?controleur=Avion_types&action=index",
         minLength: 1
         
     });

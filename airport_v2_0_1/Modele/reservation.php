@@ -15,8 +15,9 @@ class Reservation extends modele
 
     function setReservation($reservation)
     {
+        var_dump($reservation);
         $sql = 'INSERT INTO donnees_reservations (idDonnee, idAvion, idAeroport, idUtilisateur, courriel) VALUES(?, ?, ?, ?, ?)';
-        $result = $this->executerRequete($sql, array($reservation));
+        $result = $this->executerRequete($sql, [$reservation['idDonnee'], $reservation['idAvion'], $reservation['idAeroport'], $reservation['idUtilisateur'], $reservation['courriel']]);
 
         return $result;
     }

@@ -18,7 +18,7 @@ foreach ($avions as $avion) {
     echo '<tr><td>' .
         '<p><a href="Avions/modifierAvion/' . $avion['idAvion'] . '">[mod.]</a> ' .
         '<a href="Avions/supprimerAvion/' . $avion['idAvion'] . '">[suppr.]</a> </td><td><strong>' .
-        '<a href="index.php?action=avion&id=' . $avion['idAvion'] . '">' . htmlspecialchars($avion['nom']) . '</strong></a></td><td>';
-    echo htmlspecialchars($avion['autresDetails']) . '</td><td>' . htmlspecialchars($avion['nbreSieges']) . ' sièges</td><td> Site de l\'avion'
-        . htmlspecialchars($avion['urlModele']) . '</td></tr>';
+        '<a href="Avions/avion/' . $avion['idAvion'] . '">' . htmlspecialchars($this->nettoyer($avion['nom'])) . '</strong></a></td><td>';
+    echo htmlspecialchars($this->nettoyer($avion['autresDetails'])) . '</td><td>' . htmlspecialchars($avion['nbreSieges']) . ' sièges</td><td> Site de l\'avion'
+        . htmlspecialchars($this->nettoyer($avion['urlModele'])) . '</td></tr>';
 }

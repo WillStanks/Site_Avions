@@ -42,7 +42,7 @@ class Avion extends modele
     {
         // Suppression de l'avion à l'aide d'une requête préparée
         $sql = 'DELETE FROM avion WHERE idAvion = ?';
-        $avion = $this->executerRequete($sql, $idAvion);
+        $avion = $this->executerRequete($sql, [$idAvion]);
 
         return $avion;
     }

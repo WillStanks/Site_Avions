@@ -21,11 +21,18 @@ class ControleurReservations extends Controleur
         $this->genererVue(['reservations' => $reservations]);
     }
 
-    // Ajoute une réservation à un avion
-    public function reservation()
+    public function nouvelReserv()
     {
-        $reservation['idDonnee'] = $this->requete->getParametreId("idDonnee");
-        $reservation['idAvion'] = $this->requete->getParametre('idAvion');
+        $erreur = $this->requete->getSession()->existeAttribut("erreur") ? $this->requete->getsession()->getAttribut("erreur") : '';
+        $idAvion = $this->requete->getParametreId("id");
+        $this->genererVue(['idAvion' => $idAvion, 'erreur' => $erreur]);
+    }
+
+    // Ajoute une réservation à un avion
+    public function ajouter()
+    {
+        $reservation['idAvion'] = $this->requete->getParametreId("idAvion");
+        $reservation['courriel'] = $this->requete->getParametre('courriel');
         $validation_courriel = filter_var($reservation['courriel'], FILTER_VALIDATE_EMAIL);
         if ($validation_courriel) {
             // Éliminer un code d'erreur éventuel
@@ -36,11 +43,14 @@ class ControleurReservations extends Controleur
             $reservation['idUtilisateur'] = $this->requete->getParametre('idUtilisateur');
             // Ajouter la reservation à l'aide du modèle
             $this->reservation->setReservation($reservation);
+            //Recharger la page pour mettre à jour la liste des reservations associés ou afficher une erreur
+            $this->rediriger('Avions', 'avion/' . $reservation['idAvion']);
         } else {
             //Recharger la page avec une erreur près du courriel
             $this->requete->getSession()->setAttribut('erreur', 'courriel');
+            $this->requete->setParametre('id', $reservation['idAvion']);
+            $this->executerAction('nouvelReserv');
         }
-        //Recharger la page pour mettre à jour la liste des reservations associés ou afficher une erreur
-        $this->rediriger('Avions', 'avion/' . $reservation['idAvion']);
+        
     }
 }
