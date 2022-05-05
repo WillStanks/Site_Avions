@@ -12,6 +12,6 @@
         <input type="submit" value="Supprimer" />
     </p>
 </form>
-<form action="index.php">
+<form action="Avions/" method="post">
     <input type="submit" value="Annuler" />
 </form>

@@ -53,4 +53,27 @@ class ControleurReservations extends Controleur
         }
         
     }
+
+    // Modifier une réservation existante    
+    public function modifierReserv()
+    {
+        $erreur = $this->requete->getSession()->existeAttribut("erreur") ? $this->requete->getsession()->getAttribut("erreur") : '';
+        $id = $this->requete->getParametreId('id');
+        $reservation = $this->reservation->getReservation($id);
+        $this->genererVue(['reservation' => $reservation]);
+    }
+
+     // Enregistre la réservation modifié et retourne à la liste des réservations
+     public function miseAJourReserv()
+     {
+         $reservation['idDonnee'] = $this->requete->getParametreId('idDonnee');
+         $reservation['idAvion'] = $this->requete->getParametre('idAvion');
+         $reservation['idAeroport'] = $this->requete->getParametre('idAeroport');
+         $reservation['idUtilisateur'] = $this->requete->getParametre('idUtilisateur');
+         $reservation['courriel'] = $this->requete->getParametre('courriel');
+         $this->reservation->modifReserv($reservation);
+         //Recharger la page pour mettre à jour la liste des reservations associés ou afficher une erreur
+         $this->rediriger('Avions', 'avion/' . $reservation['idAvion']);
+     }
+ 
 }
