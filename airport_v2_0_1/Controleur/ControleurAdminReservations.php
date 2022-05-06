@@ -1,9 +1,9 @@
 <?php
 
 require_once 'Modele/Reservation.php';
-require_once 'Framework/Vue.php';
+require_once 'Framework/ControleurAdmin.php';
 
-class ControleurReservations extends Controleur
+class ControleurAdminReservations extends ControleurAdmin
 {
 
     private $reservation;

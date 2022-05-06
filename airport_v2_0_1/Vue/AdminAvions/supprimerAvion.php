@@ -1,7 +1,7 @@
 <?php $titre = "Supprimer un avion"; ?>
 
 
-<form action="Avions/supprimer" method="post">
+<form action="AdminAvions/supprimer" method="post">
     <h2>Supprimer un avion V0.3.1</h2>
     <p>
         Nom : <?php echo htmlspecialchars($this->nettoyer($avion['nom'])); ?><br />
@@ -12,6 +12,6 @@
         <input type="submit" value="Supprimer" />
     </p>
 </form>
-<form action="Avions/" method="post">
+<form action="AdminAvions" method="post">
     <input type="submit" value="Annuler" />
 </form>
