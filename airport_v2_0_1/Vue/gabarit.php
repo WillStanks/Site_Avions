@@ -23,10 +23,20 @@
         </header>
         <h2>Avions Air Transat V3.0.3</h2>
 
+        <a href="<?= $utilisateur != null ? 'Admin' : ''; ?>Commentaires"></a>
+
         <a href="Apropos">À propos</a></br>
         <a href="tests.php">
             <h3>TESTS</h3>
         </a>
+
+        <?php if (isset($utilisateur)) : ?>
+            <h3>Bonjour <?= $utilisateur['nom'] ?>,
+                <a href="Utilisateurs/deconnecter"><small>[Se déconnecter]</small></a>
+            </h3>
+        <?php else : ?>
+            <h3>[<a href="Utilisateurs/index">Se connecter</a>] <small>(admin/admin)</small></h3>
+        <?php endif; ?>
 
         <div id="contenu">
             <?= $contenu ?>

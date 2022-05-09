@@ -25,8 +25,7 @@ class ControleurAvions extends Controleur
     {
         $id = $this->requete->getParametreId("id");
         $avion = $this->avion->getAvion($id);
-        $erreur = $this->requete->getSession()->existeAttribut("erreur") ? $this->requete->getsession()->getAttribut("erreur") : '';
-        $reservations = $this->reservation->getReservations($id);
-        $this->genererVue(['avion' => $avion, 'reservations' => $reservations, 'erreur' => $erreur]);
+        $nbReserv = $this->reservation->getNombreReservAvion($id);
+        $this->genererVue(['avion' => $avion, 'nbReserv' => $nbReserv]);
     }
 }

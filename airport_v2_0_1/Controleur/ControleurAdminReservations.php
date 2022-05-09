@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Modele/Reservation.php';
-require_once 'Framework/ControleurAdmin.php';
+require_once 'Controleur/ControleurAdmin.php';
 
 class ControleurAdminReservations extends ControleurAdmin
 {
@@ -44,7 +44,7 @@ class ControleurAdminReservations extends ControleurAdmin
             // Ajouter la reservation à l'aide du modèle
             $this->reservation->setReservation($reservation);
             //Recharger la page pour mettre à jour la liste des reservations associés ou afficher une erreur
-            $this->rediriger('Avions', 'avion/' . $reservation['idAvion']);
+            $this->rediriger('AdminAvions', 'avion/' . $reservation['idAvion']);
         } else {
             //Recharger la page avec une erreur près du courriel
             $this->requete->getSession()->setAttribut('erreur', 'courriel');

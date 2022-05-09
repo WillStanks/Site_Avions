@@ -43,4 +43,22 @@ class Reservation extends modele
 
         return $req;
     }
+
+    // Permet de compter le nombre de reserv.
+    public function getNombreReserv()
+    {
+        $sql = 'select count(*) as nbReserv from donnees_reservations';
+        $resultat = $this->executerRequete($sql);
+        $ligne = $resultat->fetch();  // Le résultat comporte toujours 1 ligne
+        return $ligne['nbReserv'];
+    }
+
+    // Permet de compter le nombre de reserv dans un avion.
+    public function getNombreReservAvion($idAvion)
+    {
+        $sql = 'select count(*) as nbReserv from donnees_reservations WHERE idAvion = ?';
+        $resultat = $this->executerRequete($sql, [$idAvion]);
+        $ligne = $resultat->fetch();  // Le résultat comporte toujours 1 ligne
+        return $ligne['nbReserv'];
+    }
 }

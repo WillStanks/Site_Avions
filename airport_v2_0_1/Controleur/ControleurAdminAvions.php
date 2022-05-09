@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Framework/ControleurAdmin.php';
+require_once 'Controleur/ControleurAdmin.php';
 require_once 'Modele/Avion.php';
 require_once 'Modele/Reservation.php';
 
@@ -88,9 +88,17 @@ class ControleurAdminAvions extends ControleurAdmin
     public function supprimer()
     {
         $id = $this->requete->getParametreId('idAvion');
-        $avion = $this->avion->getAvion($id);
         $this->avion->deleteAvion($id);
         $this->executerAction('index');
-        $this->rediriger('Avions');
+    }
+
+    // Rétablir un avion
+    public function retablir()
+    {
+        $id = $this->requete->getParametreId("id");
+        // Supprimer l'avion à l'aide du modèle
+        $this->avion->restoreAvion($id);
+        //Recharger la page pour mettre à jour la liste des commentaires associés
+        $this->executerAction('index');
     }
 }

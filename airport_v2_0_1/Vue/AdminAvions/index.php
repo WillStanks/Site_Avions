@@ -1,24 +1,22 @@
 <?php $titre = 'Liste des avions'; ?>
-
 <h1 data-i18n="ListeAvions">Liste des avions disponibles</h1>
 
 <a href="AdminAvions/nouvelAvion">Ajouter un avion</a>
-<table>
-    <tr>
-        <th>Actions</th>
-        <th>Nom de l'avion</th>
-        <th>Détails de l'avion</th>
-        <th>Nombre de sièges</th>
-    </tr>
-</table>
 
 <?php
-// Affichage de chaque avion (toutes les données sont protégées par htmlspecialchars)
-foreach ($avions as $avion) {
-    echo '<tr><td>' .
-        '<p><a href="Avions/modifierAvion/' . $avion['idAvion'] . '">[mod.]</a> ' .
-        '<a href="Avions/supprimerAvion/' . $avion['idAvion'] . '">[suppr.]</a> </td><td><strong>' .
-        '<a href="Avions/avion/' . $avion['idAvion'] . '">' . htmlspecialchars($this->nettoyer($avion['nom'])) . '</strong></a></td><td>';
-    echo htmlspecialchars($this->nettoyer($avion['autresDetails'])) . '</td><td>' . htmlspecialchars($avion['nbreSieges']) . ' sièges</td><td> Site de l\'avion'
-        . htmlspecialchars($this->nettoyer($avion['urlModele'])) . '</td></tr>';
-}
+foreach ($avions as $avion) :
+?>
+    <?php if ($avion['efface'] == '0') : ?>
+        <p><a href="AdminAvions/supprimerAvion/<?= $this->nettoyer($avion['idAvion']) ?>"> [Supprimer]</a><br />
+            <a href="AdminAvions/modifierAvion/<?= $this->nettoyer($avion['idAvion']) ?>"> [Modifier]</a><br />
+            <a href="AdminAvions/avion/<?= $this->nettoyer($avion['idAvion']) ?>"><?= $this->nettoyer($avion['nom']) ?></a><br />
+            <?= $this->nettoyer($avion['autresDetails']) ?><br />
+            <?= $avion['nbreSieges'] . " sièges" ?><br />
+            <?= "Site de l'avion : " . $this->nettoyer($avion['urlModele']) ?> <br />
+        </p>
+    <?php else : ?>
+        <p class="efface"><a href="AdminAvions/retablir/<?= $this->nettoyer($avion['idAvion']) ?>"> [Rétablir]</a><br />
+            L'avion <?= $this->nettoyer($avion['nom']) ?> à été effacé !<br />
+        </p>
+    <?php endif; ?>
+<?php endforeach; ?>

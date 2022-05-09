@@ -37,14 +37,24 @@ class Avion extends modele
         return $req;
     }
 
-    // Permet de supprimer un avion.
+    // Permet d'effacer un avion.
     function deleteAvion($idAvion)
     {
-        // Suppression de l'avion à l'aide d'une requête préparée
-        $sql = 'DELETE FROM avion WHERE idAvion = ?';
-        $avion = $this->executerRequete($sql, [$idAvion]);
+        $sql = 'UPDATE avion'
+            . ' SET efface = 1'
+            . ' WHERE idAvion = ?';
+        $result = $this->executerRequete($sql, [$idAvion]);
+        return $result;
+    }
 
-        return $avion;
+    // Réactive un un avion
+    public function restoreAvion($idAvion)
+    {
+        $sql = 'UPDATE avion'
+            . ' SET efface = 0'
+            . ' WHERE idAvion = ?';
+        $result = $this->executerRequete($sql, [$idAvion]);
+        return $result;
     }
 
     // Permet de modifier un avion.
