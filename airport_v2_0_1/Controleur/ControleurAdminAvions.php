@@ -49,6 +49,7 @@ class ControleurAdminAvions extends ControleurAdmin
             }
             $avion['autresDetails'] = $this->requete->getParametre('autresDetails');
             $avion['nbreSieges'] = $this->requete->getParametre('nbreSieges');
+            $avion['image'] = $this->requete->getParametre('image');
             $this->avion->setAvion($avion);
             $this->executerAction('index');
         } else {

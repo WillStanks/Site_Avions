@@ -4,10 +4,10 @@
 <p><strong> 420-4a4 MO </strong> Web et bases de données </br>Hiver 2022, Collège Montmorency</p>
 <a href="Avions">Retour à la page d'accueil</a>
 <h3>Diagramme réalisé avec Designer</h3>
-<img src="images/diagrammeWill.PNG" alt="Diagramme PhpMyAdmin" width="30%">
+<img src="Contenu\images\apropos\diagrammeWill.PNG" alt="Diagramme PhpMyAdmin" width="30%">
 <h3>Diagramme source</h3>
 <a href="http://www.databaseanswers.org/data_models/flight_bookings/index.htm"> Lien vers la source </a></br>
-<img src="images\diagrammeVol.png" alt="Diagramme Source" width="20%">
+<img src="Contenu\images\apropos\diagrammeVol.png" alt="Diagramme Source" width="20%">
 <h3>Brève explication du fonctionnement de mon application</h3>
 <h4>Type d'association entre les 2 tables.</h4>
 <p>

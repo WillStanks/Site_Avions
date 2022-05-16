@@ -8,6 +8,11 @@
   <p><?= $this->nettoyer($avion['autresDetails']) ?></p>
   <p><?= $avion['nbreSieges'] ?> sièges</p>
   <p><?= $this->nettoyer($avion['urlModele']) ?></p>
+  <?php
+  if ($avion['image'] != "") {
+    echo '<img src="' . 'Contenu/images/avions/' . $avion['image'] . '" width=50px>';
+  }
+  ?>
   <h1 class="nomAvion">Réservations associés a l'avion <?= $avion['nom'] ?></h1>
 </header>
 <?php foreach ($reservations as $reserv) : ?>
